@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Report Portal Tests automation regression suite" thread-count="1">
+
+    <test name="DashboardsTests_chrome">
+        <classes>
+            <class name="tests.DashboardTests"/>
+        </classes>
+    </test>
+
+</suite>

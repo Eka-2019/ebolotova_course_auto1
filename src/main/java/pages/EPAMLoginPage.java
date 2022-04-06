@@ -1,23 +1,25 @@
 package pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class EPAMLoginPage extends AbstractPage {
 
-    private final String BASE_URL = "https://login.epam.com";
+public class EPAMLoginPage extends BasePage {
 
-    @FindBy(xpath = "//*[@id=\"companyLogo\"]")
+    private static final Logger LOGGER = Logger.getLogger(String.valueOf(EPAMLoginPage.class));
+
+    @FindBy(id = "companyLogo")
     private WebElement companyLogo;
 
-    @FindBy(xpath = "//*[@id=\"userNameInput\"]")
+    @FindBy(id = "userNameInput")
     private WebElement login;
 
-    @FindBy(xpath = "//*[@id=\"passwordInput\"]")
+    @FindBy(id = "passwordInput")
     private WebElement password;
-
 
     public EPAMLoginPage(WebDriver driver) {
         super(driver);
@@ -26,10 +28,11 @@ public class EPAMLoginPage extends AbstractPage {
 
     @Override
     public EPAMLoginPage openPage() {
-        driver.navigate().to(BASE_URL);
+        driver.navigate().to(base_url);
         return this;
     }
 
+    @Step ("Login to EPAM page")
     public String getLogoText() {
         return companyLogo.getAttribute("alt");
     }

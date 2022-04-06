@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class NewWidgetPopUp {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     @FindBy(xpath = "//div[contains(text(), \"Overall statistics\")]")
     private WebElement overallStatisticsRadioButton;

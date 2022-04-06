@@ -1,14 +1,16 @@
 package pages;
 
+import io.qameta.allure.Step;
 import model.User;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ReportLoginPage extends AbstractPage {
+public class ReportLoginPage extends BasePage {
 
-    private final String BASE_URL = "https://reportportal.epam.com/ui/#login";
+    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(String.valueOf(ReportLoginPage.class));
 
     @FindBy(xpath = "//input[@placeholder='Login']")
     private WebElement loginField;
@@ -29,30 +31,36 @@ public class ReportLoginPage extends AbstractPage {
 
     @Override
     public ReportLoginPage openPage() {
-        driver.navigate().to(BASE_URL);
+        driver.navigate().to(base_url);
+        this.waitForXpath(2000,"//button[@type = \"submit\"]");
+        //this.wait.until(ExpectedConditions.titleContains("Welcome,"));
         return this;
     }
 
-
-    public EPAMLoginPage loginOld(String name, String password) {
-        loginField.sendKeys(name);
-        passwordField.sendKeys(password);
-        loginAsEPAMer.click();
-        return new EPAMLoginPage(driver);
-    }
-
-    public EPAMLoginPage loginToEPAMLoginPage(User user) {
+    @Step("Login to EPAM Login Page")
+    public EPAMLoginPage loginViaEPAMLoginPage(User user) {
         loginField.sendKeys(user.getUserName());
         passwordField.sendKeys(user.getPassword());
         loginAsEPAMer.click();
+        LOGGER.info("udername: " + user.getUserName() + "password: " + user.getPassword());
         return new EPAMLoginPage(driver);
     }
 
+    @Step("Login to Dashboard Page")
     public ReportPortalMainPage loginToDashboardPage(User user) {
         loginField.sendKeys(user.getUserName());
         passwordField.sendKeys(user.getPassword());
         login.click();
-        return new ReportPortalMainPage(driver);
+        LOGGER.info("udername: " + user.getUserName() + "password: " + user.getPassword());
+        ReportPortalMainPage page = new ReportPortalMainPage(driver);
+        page.waitForXpath(2000,"//footer");
+        //page.isLoaded(2000);
+        return page;
     }
 
+    @Override
+    public BasePage waitForXpath(int timeOut, String xpath) {
+        super.waitForXpath(timeOut, xpath);
+        return this;
+    }
 }
