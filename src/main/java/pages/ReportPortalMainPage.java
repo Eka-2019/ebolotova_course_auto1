@@ -71,12 +71,6 @@ public class ReportPortalMainPage extends BasePage {
         return new NewDashboartPopUp(driver);
     }
 
-
-    public ReportPortalMainPage deleteDashboardfromDashboardList(){
-        deleteDashboardIcon.click();
-        return this;
-    }
-
     @Step("Delete Dashboard from Dashboard Screen")
     public ReportPortalMainPage deleteDashboardfromDashboardScreen(){
         deleteDashboardButton.click();
@@ -92,7 +86,7 @@ public class ReportPortalMainPage extends BasePage {
     }
 
     @Step("Get Dashboard Name")
-    public String  getDashboardRowName(){
+    public String getDashboardRowNameInRow(){
         return dashboardRowName.getText();
     }
 
@@ -107,5 +101,4 @@ public class ReportPortalMainPage extends BasePage {
         userLogout.click();
         return new ReportLoginPage(driver);
     }
-
 }

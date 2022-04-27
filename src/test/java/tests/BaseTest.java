@@ -6,7 +6,6 @@ import model.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.EPAMLoginPage;
 import pages.ReportLoginPage;
 import pages.ReportPortalMainPage;
 
@@ -19,9 +18,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-
         driver = dm.getDriver();
-
     }
 
     @Step("Login to Report Portal as normal User")
@@ -37,13 +34,6 @@ public class BaseTest {
                 .loginToDashboardPage(testUser);
     }
 
-    @Step("Login to Report Portal as EPAM User")
-    public EPAMLoginPage loginToPortalViaEPAMPage(User testUser) {
-        return new ReportLoginPage(driver)
-                .openPage()
-                .loginViaEPAMLoginPage(testUser);
-    }
-
     @AfterMethod
     public void stopBrowser() {
         if (driver != null) {
@@ -51,5 +41,4 @@ public class BaseTest {
             driver = null;
         }
     }
-
 }

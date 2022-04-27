@@ -3,7 +3,7 @@
 
 <suite name="Report Portal Tests automation regression suite" thread-count="1">
 
-    <test name="DashboardsTests_chrome">
+    <test name="DashboardsTests">
         <classes>
             <class name="tests.DashboardTests"/>
         </classes>

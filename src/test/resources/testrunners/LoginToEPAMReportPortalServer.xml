@@ -3,16 +3,12 @@
 
 <suite name="Report Portal Tests automation regression suite">
 
-    <listeners>
-        <listener
-                class-name="testlistener.TestListener"/>
-    </listeners>
-    <test name="LoginTestViaEPAM_chrome">
+    <test name="LoginTest">
         <parameter name="url" value="https://rp.epam.com/ui/#login"/>
         <parameter name="login" value="eka_2022"/>
         <parameter name="password" value="Qweasd_123?"/>
         <classes>
-            <class name="tests.LoginTestWithEPAM"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
 

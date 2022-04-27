@@ -1,8 +1,8 @@
 package pages;
 
+import lombok.Getter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@Getter
 public abstract class BasePage {
 
     protected WebDriver driver;
@@ -17,7 +18,6 @@ public abstract class BasePage {
     protected static final int WAIT_TIME_OUT = 20;
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(BasePage.class));
     protected String base_url;
-
 
     protected abstract BasePage openPage();
 
@@ -36,5 +36,4 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
         return this;
     }
-
 }

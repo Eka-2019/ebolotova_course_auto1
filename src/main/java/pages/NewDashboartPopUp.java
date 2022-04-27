@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 public class NewDashboartPopUp extends BasePage {
 
     private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(String.valueOf(NewDashboartPopUp.class));
@@ -34,9 +33,8 @@ public class NewDashboartPopUp extends BasePage {
         PageFactory.initElements(this.driver, this);
     }
 
-
     @Step("Login to Report Portal Main Page")
-    public ReportPortalMainPage fillNameFiled(String dashboardName, String description) throws InterruptedException {
+    public ReportPortalMainPage FillPopUp (String dashboardName, String description) {
         nameField.sendKeys(dashboardName);
         descriptionField.sendKeys(description);
         addButton.click();
@@ -44,5 +42,4 @@ public class NewDashboartPopUp extends BasePage {
         resultPage.waitForXpath(2000, "//a[contains(@class, \"pageBreadcrumbs__page\")]");
     return resultPage;
     }
-
 }
