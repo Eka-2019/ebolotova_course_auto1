@@ -24,6 +24,6 @@ public class LoginTest extends BaseTest {
 
         assertThat(loginPage.getCurrentPageURL().toString(), is(url.replaceFirst("login", login + "_personal/dashboard")));
         assertThat(loginPage.getAllDashboards().getText(), is("ALL DASHBOARDS"));
-
+        LOGGER.info("Header of page: " + loginPage.getAllDashboards().getText());
     }
 }

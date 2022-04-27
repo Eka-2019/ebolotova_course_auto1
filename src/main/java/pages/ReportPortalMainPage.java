@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 public class ReportPortalMainPage extends BasePage {
     private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(String.valueOf(ReportPortalMainPage.class));
 
-    @FindBy(xpath = "//*[contains(text(), 'You have no dashboards')]")
+    @FindBy(xpath = "//p[contains(@class, \"emptyDashboards__empty-dashboard-headline--\")]")
     private WebElement noDashboardText;
 
     @FindBy(xpath = "//a[contains(@class, \"pageBreadcrumbs__page\")]")
@@ -21,11 +21,8 @@ public class ReportPortalMainPage extends BasePage {
     @FindBy(xpath = "//button[contains(@class, \"ghostButton\")][1]")
     private WebElement buttonAddNewDashboard;
 
-    @FindBy(xpath = "//span[contains(text(), \"All Dashboards\")]")
+    @FindBy(xpath = "//span[contains(@title, \"All Dashboards\")]")
     private WebElement allDashboards;
-
-    @FindBy(xpath = "//span[contains(text(), \"Logout\")]")
-    private WebElement userLogout;
 
     @FindBy(xpath = "//span[contains(@title, \"test dashboard name\")]")
     private WebElement dashboardTitleName;
@@ -33,13 +30,10 @@ public class ReportPortalMainPage extends BasePage {
     @FindBy(xpath = "//a[contains(@class, \"gridCell\") and contains(text(), \"test dashboard name\")]")
     private WebElement dashboardName;
 
-    @FindBy(xpath = "//span[contains(text(), \"Add new widget\")]")
-    private WebElement addNewWidgetButton;
-
     @FindBy(xpath = "//i[contains(@class, \"icon-delete\")][1]")
     private WebElement deleteDashboardIcon;
 
-    @FindBy(xpath = "//span[contains(text(), \"Delete\")]")
+    @FindBy(xpath = "//div[contains(@class, \"dashboardItemPage__buttons-container--28m3K\")]//button[3]//span")
     private WebElement deleteDashboardButton;
 
     @FindBy(xpath = "//button[contains(@type, \"button\") and contains(@class, \"bigButton__color-tomato\")]")
@@ -94,11 +88,5 @@ public class ReportPortalMainPage extends BasePage {
     public ReportPortalMainPage getParticularDashboardPage(){
         dashboardName.click();
         return this;
-    }
-
-    @Step("Logout User")
-    public ReportLoginPage userLogout() {
-        userLogout.click();
-        return new ReportLoginPage(driver);
     }
 }

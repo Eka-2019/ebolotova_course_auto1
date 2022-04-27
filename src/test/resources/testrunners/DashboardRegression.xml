@@ -8,5 +8,4 @@
             <class name="tests.DashboardTests"/>
         </classes>
     </test>
-
 </suite>

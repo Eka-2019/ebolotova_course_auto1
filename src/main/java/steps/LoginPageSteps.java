@@ -35,7 +35,6 @@ public class LoginPageSteps {
         return pageAfterLogin;
     }
 
-
     @Step("Login into Report Portal")
     public ReportPortalMainPage loginIntoReportPortal(ReportLoginPage page) {
         User testUser = UserCreator.withCredentialsFromProperty();

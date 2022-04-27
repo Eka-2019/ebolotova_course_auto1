@@ -22,7 +22,7 @@ public class DashboardTests extends BaseTest {
         ReportPortalMainPage reportPage = loginToPortalMainPage(testUser);
 
         assertThat(reportPage.getEmptyDashboard(), is("You have no dashboards"));
-        LOGGER.info(reportPage.getEmptyDashboard());
+        LOGGER.info("There is no any dashboard: " + reportPage.getEmptyDashboard());
     }
 
     @Test(priority = 2)

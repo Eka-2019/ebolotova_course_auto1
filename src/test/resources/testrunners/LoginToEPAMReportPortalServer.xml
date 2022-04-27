@@ -9,7 +9,7 @@
         <parameter name="password" value="Qweasd_123?"/>
         <classes>
             <class name="tests.LoginTest"/>
+            <class name="tests.LoginTestBySteps"/>
         </classes>
     </test>
-
 </suite>

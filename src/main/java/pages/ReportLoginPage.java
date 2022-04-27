@@ -21,10 +21,7 @@ public class ReportLoginPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder='Password']")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//button[1]")
-    private WebElement loginAsEPAMer;
-
-    @FindBy(xpath = "//button[contains(text(), \"Login\")]")
+    @FindBy(xpath = "//button[contains(@type, \"submit\")]")
     private WebElement login;
 
     public ReportLoginPage(WebDriver driver) {
@@ -36,7 +33,6 @@ public class ReportLoginPage extends BasePage {
         loginField.sendKeys(user.getLogin());
         passwordField.sendKeys(user.getPassword());
         login.click();
-        LOGGER.info("udername: " + user.getLogin() + "password: " + user.getPassword());
         ReportPortalMainPage page = new ReportPortalMainPage(driver);
         page.waitForXpath(2000, "//footer");
         //page.isLoaded(2000);

@@ -20,7 +20,7 @@ public class NewDashboartPopUp extends BasePage {
     @FindBy(xpath = "//div[contains(@class, \"inputBigSwitcher\")]")
     private WebElement shareSwitch;
 
-    @FindBy(xpath = "//button[contains(text(), \"Add\")]")
+    @FindBy(xpath = "//div[contains(@class, \"modalFooter__buttons-block--14nRL\")]//div[2]//button")
     private WebElement addButton;
 
     @Override
