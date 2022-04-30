@@ -2,7 +2,6 @@ package pages;
 
 import io.qameta.allure.Step;
 import lombok.Getter;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class ReportPortalMainPage extends BasePage {
-    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(String.valueOf(ReportPortalMainPage.class));
 
     @FindBy(xpath = "//p[contains(@class, \"emptyDashboards__empty-dashboard-headline--\")]")
     private WebElement noDashboardText;
@@ -49,7 +47,6 @@ public class ReportPortalMainPage extends BasePage {
 
     @Override
     public ReportPortalMainPage openPage() {
-        //https://reportportal.epam.com/ui/#eka_2022_personal/dashboard
         driver.navigate().to(base_url.replaceFirst("login",System.getProperty("login") + "_personal/dashboard"));
         return this;
     }
@@ -75,7 +72,6 @@ public class ReportPortalMainPage extends BasePage {
     @Step("Confirm Dashboard Deletion")
     public ReportPortalMainPage confirmDashboardDeletion() {
         deleteDashboardButtonConfirmation.click();
-        //waitForXpath(20,"//footer");
         return this;
     }
 

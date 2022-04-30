@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends BaseTestingClass {
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoginTest.class));
 
     @Test
@@ -23,6 +23,7 @@ public class LoginTest extends BaseTest {
         ReportPortalMainPage loginPage = loginToPortalMainPage(testUser);
 
         assertThat(loginPage.getCurrentPageURL().toString(), is(url.replaceFirst("login", login + "_personal/dashboard")));
+        LOGGER.info("Tests run: "+ loginPage.getCurrentPageURL().getHost());
         assertThat(loginPage.getAllDashboards().getText(), is("ALL DASHBOARDS"));
         LOGGER.info("Header of page: " + loginPage.getAllDashboards().getText());
     }

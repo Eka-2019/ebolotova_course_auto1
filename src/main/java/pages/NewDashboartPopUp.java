@@ -1,15 +1,12 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class NewDashboartPopUp extends BasePage {
-
-    private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(String.valueOf(NewDashboartPopUp.class));
 
     @FindBy(xpath = "//input[@placeholder='Enter dashboard name']")
     private WebElement nameField;

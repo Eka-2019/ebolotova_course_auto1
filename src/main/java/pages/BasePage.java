@@ -28,7 +28,6 @@ public abstract class BasePage {
     protected BasePage(WebDriver driver) {
         this.driver = driver;
         this.base_url = System.getProperty("url");
-        //wait = new WebDriverWait(driver, WAIT_TIME_OUT);
     }
 
     public BasePage waitForXpath(int timeOut, String xpath) {

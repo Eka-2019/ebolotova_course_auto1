@@ -6,12 +6,13 @@ import model.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import pages.ReportLoginPage;
 import pages.ReportPortalMainPage;
+import testlistener.TestListener;
 
-
-//@Listeners({TestListener.class})
-public class BaseTest {
+@Listeners({TestListener.class})
+public class BaseTestingClass {
 
     protected DriverManager dm = new DriverManager();
     protected WebDriver driver;

@@ -44,7 +44,6 @@ public class LoginPageSteps {
         page.getLogin().click();
         ReportPortalMainPage pageAfterLogin = new ReportPortalMainPage(page.getDriver());
         page.waitForXpath(2000, "//footer");
-        //page.isLoaded(2000);
         return pageAfterLogin;
     }
 }

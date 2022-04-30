@@ -13,19 +13,9 @@ import java.net.URISyntaxException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class LoginTestBySteps extends BaseTest {
+public class LoginTestBySteps extends BaseTestingClass {
 
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoginTestBySteps.class));
-
-    @Test
-    public void testLoginViaBigStep() throws URISyntaxException {
-        ReportLoginPage page = new ReportLoginPage(driver);
-        LoginPageSteps steps = new LoginPageSteps(page);
-        ReportPortalMainPage pageAfterLogin = steps.loginIntoReportPortal(page);
-
-        assertThat(pageAfterLogin.getCurrentPageURL().toString(), is(System.getProperty("url").replaceFirst("login", System.getProperty("login") + "_personal/dashboard")));
-        assertThat(pageAfterLogin.getAllDashboards().getText(), is("ALL DASHBOARDS"));
-    }
 
     @Test
     public void testLoginViaSmallSteps() throws URISyntaxException {
@@ -43,7 +33,7 @@ public class LoginTestBySteps extends BaseTest {
         assertThat(loginPage.getCurrentPageURL().toString(),
                 is(System.getProperty("url")
                         .replaceFirst("login", testUser.getLogin() + "_personal/dashboard")));
-
+        LOGGER.info("Test runs: " + loginPage.getCurrentPageURL().getHost());
         assertThat(loginPage.getAllDashboards().getText(), is("ALL DASHBOARDS"));
     }
 }

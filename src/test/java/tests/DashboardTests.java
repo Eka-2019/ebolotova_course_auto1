@@ -3,6 +3,7 @@ package tests;
 import model.User;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
+
 import pages.NewDashboartPopUp;
 import pages.ReportPortalMainPage;
 import service.UserCreator;
@@ -12,7 +13,7 @@ import java.net.URISyntaxException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class DashboardTests extends BaseTest {
+public class DashboardTests extends BaseTestingClass {
 
     private final User testUser = UserCreator.withCredentialsFromProperty();
     private final Logger LOGGER = Logger.getLogger(String.valueOf(DashboardTests.class));
