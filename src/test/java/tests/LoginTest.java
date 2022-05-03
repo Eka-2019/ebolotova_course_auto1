@@ -2,6 +2,7 @@ package tests;
 
 import model.User;
 import org.apache.log4j.Logger;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.ReportPortalMainPage;
@@ -15,6 +16,7 @@ public class LoginTest extends BaseTestingClass {
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoginTest.class));
 
     @Test
+    @Ignore
     @Parameters({"url", "login", "password"})
     public void testLogin(String url, String login, String password) throws URISyntaxException {
         User testUser = new User(login, password);
