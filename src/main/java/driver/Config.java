@@ -16,7 +16,7 @@ public class Config {
 
         try {
             InputStream propertiesFile = Config.class.getClassLoader()
-                    .getResourceAsStream("config/"+ env + ".properties");
+                    .getResourceAsStream( env + ".properties");
             properties.load(propertiesFile);
 
         } catch (IOException e) {
