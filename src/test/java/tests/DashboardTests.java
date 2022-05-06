@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import pages.NewDashboartPopUp;
 import pages.ReportPortalMainPage;
 import service.UserCreator;
+import utils.Utils;
 
 import java.net.URISyntaxException;
 
@@ -38,8 +39,8 @@ public class DashboardTests extends BaseTestingClass {
         LOGGER.info(reportPageAfterPopUp.getCurrentPageURL().getHost());
 
         reportPageAfterPopUp.deleteDashboardfromDashboardScreen()
-                .confirmDashboardDeletion()
-                .waitForXpath(200, "//*[contains(text(), 'You have no dashboards')]");
+                .confirmDashboardDeletion();
+        Utils.waitForXpath(reportPageAfterPopUp.getDriver(),200, "//*[contains(text(), 'You have no dashboards')]");
 
         assertThat(reportPage.getEmptyDashboard(), is("You have no dashboards"));
         LOGGER.info(reportPage.getEmptyDashboard());

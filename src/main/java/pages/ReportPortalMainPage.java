@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.Utils;
 
 @Getter
 public class ReportPortalMainPage extends BasePage {
@@ -65,7 +66,7 @@ public class ReportPortalMainPage extends BasePage {
     @Step("Delete Dashboard from Dashboard Screen")
     public ReportPortalMainPage deleteDashboardfromDashboardScreen(){
         deleteDashboardButton.click();
-        waitForXpath(200,"//button[contains(@type, \"button\") and contains(@class, \"bigButton__color-tomato\")]");
+        Utils.waitForXpath(driver, 200,"//button[contains(@type, \"button\") and contains(@class, \"bigButton__color-tomato\")]");
         return this;
     }
 

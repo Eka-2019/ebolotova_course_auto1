@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.Utils;
 
 public class NewDashboartPopUp extends BasePage {
 
@@ -36,7 +37,9 @@ public class NewDashboartPopUp extends BasePage {
         descriptionField.sendKeys(description);
         addButton.click();
         ReportPortalMainPage resultPage = new ReportPortalMainPage(driver);
-        resultPage.waitForXpath(2000, "//a[contains(@class, \"pageBreadcrumbs__page\")]");
+
+        Utils.waitForXpath(driver, 2000, "//a[contains(@class, \"pageBreadcrumbs__page\")]");
+//        resultPage.waitForXpath(2000, "//a[contains(@class, \"pageBreadcrumbs__page\")]");
     return resultPage;
     }
 }

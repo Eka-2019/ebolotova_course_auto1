@@ -6,6 +6,7 @@ import model.User;
 import pages.ReportLoginPage;
 import pages.ReportPortalMainPage;
 import service.UserCreator;
+import utils.Utils;
 
 @AllArgsConstructor
 public class LoginPageSteps {
@@ -31,7 +32,8 @@ public class LoginPageSteps {
     @Step("Get Report Portal Main Page")
     public ReportPortalMainPage getReportPortalMainPage() {
         ReportPortalMainPage pageAfterLogin = new ReportPortalMainPage(page.getDriver());
-        pageAfterLogin.waitForXpath(2000, "//footer");
+        //pageAfterLogin.waitForXpath(2000, "//footer");
+        Utils.waitForXpath(page.getDriver(), 2000, "//footer");
         return pageAfterLogin;
     }
 
@@ -43,7 +45,7 @@ public class LoginPageSteps {
         page.getPasswordField().sendKeys(testUser.getPassword());
         page.getLogin().click();
         ReportPortalMainPage pageAfterLogin = new ReportPortalMainPage(page.getDriver());
-        page.waitForXpath(2000, "//footer");
+        Utils.waitForXpath(pageAfterLogin.getDriver(), 2000, "//footer");
         return pageAfterLogin;
     }
 }
