@@ -19,7 +19,6 @@ public class LoginByStepsTest extends BaseTestingClass {
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoginByStepsTest.class));
 
     @Test
-    @Ignore
     public void testLoginViaSmallSteps() throws URISyntaxException {
         ReportLoginPage page = new ReportLoginPage(driver);
         User testUser = UserCreator.withCredentialsFromProperty();

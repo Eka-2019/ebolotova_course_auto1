@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Report Portal Tests automation regression suite" thread-count="1">
+<suite name="Report Portal Tests automation regression suite" parallel="methods" thread-count="2">
+    <listeners>
+        <listener class-name="testlistener.TestListener"/>
+    </listeners>
 
     <test name="DashboardsTests">
         <classes>

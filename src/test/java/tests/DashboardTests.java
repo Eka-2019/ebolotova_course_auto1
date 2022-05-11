@@ -2,11 +2,13 @@ package tests;
 
 import model.User;
 import org.apache.log4j.Logger;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import pages.NewDashboartPopUp;
 import pages.ReportPortalMainPage;
 import service.UserCreator;
+import testlistener.TestListener;
 import utils.Utils;
 
 import java.net.URISyntaxException;
@@ -14,6 +16,7 @@ import java.net.URISyntaxException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+@Listeners({TestListener.class})
 public class DashboardTests extends BaseTestingClass {
 
     private final User testUser = UserCreator.withCredentialsFromProperty();

@@ -103,21 +103,19 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <!-- TestNG suite XML files -->
-                        <!-- <suiteXmlFile>src/test/resources/testrunners/LoginToDocker.xml</suiteXmlFile>
-                        <suiteXmlFile>src/test/resources/testrunners/LoginToEPAMReportPortalServer.xml</suiteXmlFile>-->
+                        <suiteXmlFile>src/test/resources/testrunners/LoginToDocker.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testrunners/LoginToEPAMReportPortalServer.xml</suiteXmlFile>
                         <suiteXmlFile>src/test/resources/testrunners/DashboardRegression.xml</suiteXmlFile>
+                        <skipTests>false</skipTests>
                     </suiteXmlFiles>
+                    <properties>
+                        <property>
+                            <name>suitethreadpoolsize</name>
+                            <value>2</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <source>11</source>-->
-<!--                    <target>11</target>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 

@@ -35,7 +35,7 @@ public class BaseTestingClass {
                 .loginToDashboardPage(testUser);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void stopBrowser() {
         if (driver != null) {
             dm.closeDriver();
