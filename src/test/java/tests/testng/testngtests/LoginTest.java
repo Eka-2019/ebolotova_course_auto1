@@ -1,8 +1,7 @@
-package tests;
+package tests.testng.testngtests;
 
 import model.User;
 import org.apache.log4j.Logger;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.ReportPortalMainPage;
@@ -23,7 +22,8 @@ public class LoginTest extends BaseTestingClass {
         LOGGER.info("User login and password: " + login + ", " + password);
         ReportPortalMainPage loginPage = loginToPortalMainPage(testUser);
 
-        assertThat(loginPage.getCurrentPageURL().toString(), is(url.replaceFirst("login", login + "_personal/dashboard")));
+        assertThat("https://"+loginPage.getCurrentPageURL().getHost()+"/ui/#login", is(url));
+        //assertThat(loginPage.getCurrentPageURL().toString(), is(url.replaceFirst("login", login + "_personal/dashboard")));
         LOGGER.info("Tests run: "+ loginPage.getCurrentPageURL().getHost());
         assertThat(loginPage.getAllDashboards().getText(), is("ALL DASHBOARDS"));
         LOGGER.info("Header of page: " + loginPage.getAllDashboards().getText());

@@ -1,4 +1,4 @@
-package tests;
+package tests.testng.testngtests;
 
 import model.User;
 import org.apache.log4j.Logger;

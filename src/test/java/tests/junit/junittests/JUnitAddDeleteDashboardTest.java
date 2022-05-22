@@ -1,14 +1,12 @@
-package tests;
+package tests.junit.junittests;
 
 import model.User;
 import org.apache.log4j.Logger;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
+import org.junit.Test;
 import pages.NewDashboartPopUp;
 import pages.ReportPortalMainPage;
 import service.UserCreator;
-import testlistener.TestListener;
+import tests.testng.testngtests.AddDeleteDashboardTest;
 import utils.Utils;
 
 import java.net.URISyntaxException;
@@ -16,23 +14,15 @@ import java.net.URISyntaxException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@Listeners({TestListener.class})
-public class DashboardTests extends BaseTestingClass {
+
+public class JUnitAddDeleteDashboardTest extends JUnitBaseTestingClass {
 
     private final User testUser = UserCreator.withCredentialsFromProperty();
-    private final Logger LOGGER = Logger.getLogger(String.valueOf(DashboardTests.class));
+    private final Logger LOGGER = Logger.getLogger(AddDeleteDashboardTest.class);
 
-    @Test(priority = 1)
-    public void testEmptyDashboard() {
-        ReportPortalMainPage reportPage = loginToPortalMainPage(testUser);
-
-        assertThat(reportPage.getEmptyDashboard(), is("You have no dashboards"));
-        LOGGER.info("There is no any dashboard: " + reportPage.getEmptyDashboard());
-    }
-
-    @Test(priority = 2)
+    @Test
     public void testAddNewDeleteDashboard() throws URISyntaxException {
-        ReportPortalMainPage reportPage = loginToPortalMainPage(testUser);
+        ReportPortalMainPage reportPage = loginToPortalMainPageOld(testUser);
         NewDashboartPopUp popupWindow = reportPage.displayPopup();
         ReportPortalMainPage reportPageAfterPopUp = popupWindow.FillPopUp("test dashboard name", "test dashboard name");
 
@@ -43,7 +33,7 @@ public class DashboardTests extends BaseTestingClass {
 
         reportPageAfterPopUp.deleteDashboardfromDashboardScreen()
                 .confirmDashboardDeletion();
-        Utils.waitForXpath(reportPageAfterPopUp.getDriver(),200, "//*[contains(text(), 'You have no dashboards')]");
+        Utils.waitForXpath(reportPageAfterPopUp.getDriver(), 200, "//*[contains(text(), 'You have no dashboards')]");
 
         assertThat(reportPage.getEmptyDashboard(), is("You have no dashboards"));
         LOGGER.info(reportPage.getEmptyDashboard());

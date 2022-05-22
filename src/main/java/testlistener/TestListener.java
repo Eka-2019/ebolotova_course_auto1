@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -30,7 +31,9 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        saveScreenshot();
+        ITestContext context = iTestResult.getTestContext();
+        WebDriver driver = (WebDriver)context.getAttribute("driver");
+        saveScreenshot(driver);
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
@@ -45,10 +48,8 @@ public class TestListener implements ITestListener {
         //Listener is used to identify that this class is listening for events.
     }
 
-    private void saveScreenshot(){
-        DriverManager driverManager = new DriverManager();
-        File screenShot = ((TakesScreenshot) driverManager
-                .getDriver())
+    private void saveScreenshot(WebDriver driver){
+        File screenShot = ((TakesScreenshot) driver)
                 .getScreenshotAs(OutputType.FILE);
         try{
             FileUtils.copyFile(screenShot, new File(

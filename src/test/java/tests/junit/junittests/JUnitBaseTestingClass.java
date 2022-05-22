@@ -1,41 +1,40 @@
-package tests;
+package tests.junit.junittests;
 
 import driver.DriverManager;
-import io.qameta.allure.Step;
 import model.User;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.junit.After;
+import org.junit.Before;
+
 import pages.ReportLoginPage;
 import pages.ReportPortalMainPage;
-import testlistener.TestListener;
 
-@Listeners({TestListener.class})
-public class BaseTestingClass {
+
+public class JUnitBaseTestingClass {
 
     protected DriverManager dm = new DriverManager();
     protected WebDriver driver;
 
-    @BeforeMethod
-    public void setUp() {
+//    @Before
+//    public void setUp() {
+//        driver = dm.getDriver();
+//    }
+
+    public ReportPortalMainPage loginToPortalMainPageOld(User testUser) {
         driver = dm.getDriver();
-    }
-
-    @Step("Login to Report Portal as normal User")
-    public ReportPortalMainPage loginToPortalMainPage(User testUser) {
         return new ReportLoginPage(driver)
                 .openPage()
                 .loginToDashboardPage(testUser);
     }
 
-    public ReportPortalMainPage loginToPortalMainPage_new(User testUser) {
+    public ReportPortalMainPage loginToPortalMainPage(User testUser, String browser) {
+        driver = dm.getDriver(browser);
         return new ReportLoginPage(driver)
                 .openPage()
                 .loginToDashboardPage(testUser);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @After
     public void stopBrowser() {
         if (driver != null) {
             dm.closeDriver();

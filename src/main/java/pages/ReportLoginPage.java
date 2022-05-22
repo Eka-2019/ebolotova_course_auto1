@@ -41,9 +41,4 @@ public class ReportLoginPage extends BasePage {
         return this;
     }
 
-//    @Override
-//    public BasePage waitForXpath(int timeOut, String xpath) {
-//        super.waitForXpath(timeOut, xpath);
-//        return this;
-//    }
 }

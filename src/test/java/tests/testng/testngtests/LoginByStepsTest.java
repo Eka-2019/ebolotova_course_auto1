@@ -1,8 +1,7 @@
-package tests;
+package tests.testng.testngtests;
 
 import model.User;
 import org.apache.log4j.Logger;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.ReportLoginPage;
 import pages.ReportPortalMainPage;
@@ -17,6 +16,9 @@ import static org.hamcrest.Matchers.is;
 public class LoginByStepsTest extends BaseTestingClass {
 
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoginByStepsTest.class));
+    //LOGGER.setLevel(Level.DEBUG);
+
+    //private final Logger log = Logger.getRootLogger().setLevel(Level.TRACE);
 
     @Test
     public void testLoginViaSmallSteps() throws URISyntaxException {
@@ -31,9 +33,10 @@ public class LoginByStepsTest extends BaseTestingClass {
         steps.clickLoginButton();
         ReportPortalMainPage loginPage = steps.getReportPortalMainPage();
 
-        assertThat(loginPage.getCurrentPageURL().toString(),
-                is(System.getProperty("url")
-                        .replaceFirst("login", testUser.getLogin() + "_personal/dashboard")));
+        assertThat("https://"+loginPage.getCurrentPageURL().getHost()+"/ui/#login", is(System.getProperty("url")));
+//        assertThat(loginPage.getCurrentPageURL().toString(),
+//                is(System.getProperty("url")
+//                        .replaceFirst("login", testUser.getLogin() + "_personal/dashboard")));
         LOGGER.info("Test runs: " + loginPage.getCurrentPageURL().getHost());
         assertThat(loginPage.getAllDashboards().getText(), is("ALL DASHBOARDS"));
     }
