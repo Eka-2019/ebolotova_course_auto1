@@ -3,6 +3,7 @@ package tests.api;
 import io.restassured.RestAssured;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
+import pages.EndPointUrl;
 
 import java.net.URISyntaxException;
 
@@ -18,14 +19,20 @@ public class ApiLoginTest {
     public void testLogin() throws URISyntaxException {
         //RestAssured.baseURI = URL_KEY;
         RestAssured.baseURI = "http://localhost:8080/ui";
-        //RestAssured.authentication = basic("username", "password");
-
-        RestAssured.useRelaxedHTTPSValidation();
+//        RestAssured.authentication = basic("username", "password");
+//
+//        RestAssured.useRelaxedHTTPSValidation();
         given()
+                .auth()
+                .basic("default", "1q2w3e")
                 .when()
-                .get(baseURI + "/#login").time()
-                then()
-                .
+                .get(EndPointUrl.LOGIN.addPath("/#login"))
+                .then()
+                .statusCode(200)
+                .assertThat()
+                .header("title", "Report Portal");
+
+
         given()
                 .auth()
                 .basic("default", "1q2w3e")
