@@ -4,8 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum EndPointUrl {
-    LOGIN("/#login");
-
+    DASHBOARD("/dashboard");
     String path;
 
     EndPointUrl(String path){
