@@ -1,80 +1,69 @@
 package tests.api;
 
 import io.restassured.response.Response;
+import models.Dashboard;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
-import org.testng.annotations.Test;
 import pages.EndPointUrl;
 import org.junit.jupiter.api.*;
+import utils.Constants;
+import utils.DashboardTestUtils;
 
 public class DashboardTest {
     private final Logger LOGGER = Logger.getLogger(DashboardTest.class);
 
-    public JSONObject jsonForCreation(){
-        JSONObject newDashboardJSONbody = new JSONObject();
-        newDashboardJSONbody.put("description", "Demo Dashboard API desc");
-        newDashboardJSONbody.put("name", "Demo Dashboard API" + System.currentTimeMillis());
-        newDashboardJSONbody.put("share", true);
-        return newDashboardJSONbody;
+    private String testDashboardId;
+    private Dashboard testDashboard = new Dashboard("Demo Dashboard API" + System.currentTimeMillis(), "Demo Dashboard API", true);
+
+    @BeforeEach
+    private void init() {
+        //create dashboard and get Id and name
+        testDashboardId = DashboardTestUtils.getIdFromPostNewDashboard(EndPointUrl.DASHBOARD.getPath(), testDashboard);
+        testDashboard = DashboardTestUtils.getDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId));
+        LOGGER.info(Constants.LOGGER_PATTERN + "TestDashboard :" + testDashboard.toString() + " was created"+ Constants.LOGGER_PATTERN);
+        //String dashboardName = DashboardTestUtils.getDashboardNameById(EndPointUrl.DASHBOARD.addPath("/" + dashboardID));
+        LOGGER.info(Constants.LOGGER_PATTERN + "TestDashboard with Id" + testDashboardId + " was created" + Constants.LOGGER_PATTERN);
     }
 
     @Test
-    public void createUpdateDeleteDashboardTest() {
-        JSONObject newDashboardJSONbody = jsonForCreation();
+    public void updateDashboardTest() {
+        Dashboard dashboardForUpdate = DashboardTestUtils.getDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId));
+        dashboardForUpdate.setDescription("Demo Dashboard API description updated");
+        dashboardForUpdate.setShare(false);
 
-        //create dashboard and get Id and name
-        String dashboardID = DashboardTestUtils.getIdFromPostNewDashboard(EndPointUrl.DASHBOARD.getPath(), newDashboardJSONbody.toString());
-        String dashboardName = DashboardTestUtils.getDashboardNameById(EndPointUrl.DASHBOARD.addPath("/" + dashboardID));
-        LOGGER.info("*****   Dashboard with Id" + dashboardID + " was created  *****");
-
-        //Update dashboard
-        JSONObject updatedDashboardJSONbody = new JSONObject();
-        updatedDashboardJSONbody.put("name", dashboardName);
-        updatedDashboardJSONbody.put("description", "Demo Dashboard API description updated");
-        updatedDashboardJSONbody.put("share", false);
-
-        Response updateResponse = DashboardTestUtils.updateDashboard(EndPointUrl.DASHBOARD.addPath("/" + dashboardID), updatedDashboardJSONbody.toString())
+        Response updateResponse = DashboardTestUtils.updateDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId), dashboardForUpdate)
                 .extract().response();
-        Assertions.assertEquals("Dashboard with ID = '" + dashboardID + "' successfully updated", updateResponse.jsonPath().getString("message"));
+        Assertions.assertEquals("Dashboard with ID = '" + testDashboardId + "' successfully updated", updateResponse.jsonPath().getString("message"));
         Assertions.assertEquals(200, updateResponse.getStatusCode());
-        LOGGER.info("*****   Dashboard with Id" + dashboardID + " was updated  *****");
+        LOGGER.info(Constants.LOGGER_PATTERN + "Dashboard with Id" + testDashboardId + " was updated" + Constants.LOGGER_PATTERN);
 
         //check updated Data
-        Response getUpdatedResponse = DashboardTestUtils.getDashboardReguest(EndPointUrl.DASHBOARD.addPath("/" + dashboardID))
-                .extract().response();
-        Assertions.assertEquals("Demo Dashboard API description updated", getUpdatedResponse.jsonPath().getString("description"));
-        Assertions.assertEquals("false", getUpdatedResponse.jsonPath().getString("share"));
-        Assertions.assertEquals(200, getUpdatedResponse.getStatusCode());
-        LOGGER.info("*****   Checked that Dashboard with Id" + dashboardID + " was updated  *****");
-
-        //Delete dashboard
-        Response deleteResponse = DashboardTestUtils.deleteDashboard(EndPointUrl.DASHBOARD.addPath("/" + dashboardID))
-                .extract().response();
-
-        Assertions.assertEquals("Dashboard with ID = '" + dashboardID + "' successfully deleted.", deleteResponse.jsonPath().getString("message"));
-        Assertions.assertEquals(200, updateResponse.getStatusCode());
-        LOGGER.info("*****   Dashboard with Id" + dashboardID + " was deleted  *****");
-
-        //check that Dashboard was deleted
-        Response getDeletedResponse = DashboardTestUtils.getDashboardReguest(EndPointUrl.DASHBOARD.addPath("/" + dashboardID))
-                .extract().response();
-        Assertions.assertEquals("Dashboard with ID '" + dashboardID + "' not found on project 'default_personal'. Did you use correct Dashboard ID?", getDeletedResponse.jsonPath().getString("message"));
-        Assertions.assertEquals(404, getDeletedResponse.getStatusCode());
-        LOGGER.info("*****   Checked that Dashboard with Id" + dashboardID + " was deleted  *****");
+        Dashboard dashboardAfterUpdate = DashboardTestUtils.getDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId));
+        Assertions.assertEquals(dashboardForUpdate, dashboardAfterUpdate);
+        LOGGER.info(Constants.LOGGER_PATTERN + "Checked that Dashboard with Id" + testDashboardId + " was updated" + Constants.LOGGER_PATTERN);
     }
 
     @Test
     public void creationDashboardWithSameIdTest() {
-        JSONObject newDashboardJSONbody = jsonForCreation();
+        Response createResponseDuplication = DashboardTestUtils.postNewDashboard(EndPointUrl.DASHBOARD.getPath(), testDashboard)
+                .extract().response();
+        Assertions.assertEquals(409, createResponseDuplication.getStatusCode(), createResponseDuplication.jsonPath().getString("message"));
+        LOGGER.info(Constants.LOGGER_PATTERN + "creationDashboardWithSameIdTest was completed successfully with Status code 409" + Constants.LOGGER_PATTERN);
+    }
 
-        Response createResponse = DashboardTestUtils.postNewDashboard(EndPointUrl.DASHBOARD.addPath(""),newDashboardJSONbody.toString())
+    @AfterEach
+    public void DeleteDashboardTest() {
+        Response deleteResponse = DashboardTestUtils.deleteDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId))
                 .extract().response();
 
-        Response createResponseDuplication = DashboardTestUtils.postNewDashboard(EndPointUrl.DASHBOARD.addPath(""),newDashboardJSONbody.toString())
-                .extract().response();
+        Assertions.assertEquals("Dashboard with ID = '" + testDashboardId + "' successfully deleted.", deleteResponse.jsonPath().getString("message"));
+        Assertions.assertEquals(200, deleteResponse.getStatusCode());
+        LOGGER.info(Constants.LOGGER_PATTERN + "Dashboard with Id" + testDashboardId + " was deleted" + Constants.LOGGER_PATTERN);
 
-        Assertions.assertEquals(201, createResponse.getStatusCode());
-        Assertions.assertEquals(409, createResponseDuplication.getStatusCode());
-        LOGGER.info("*****   creationDashboardWithSameIdTest was completed successfully   *****");
+        //check deleted data
+        Response getDeletedResponse = DashboardTestUtils.getDashboardReguest(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId))
+                .extract().response();
+        Assertions.assertEquals("Dashboard with ID '" + testDashboardId + "' not found on project 'default_personal'. Did you use correct Dashboard ID?", getDeletedResponse.jsonPath().getString("message"));
+        Assertions.assertEquals(404, getDeletedResponse.getStatusCode());
+        LOGGER.info(Constants.LOGGER_PATTERN + "Checked that Dashboard with Id" + testDashboardId + " was deleted" + Constants.LOGGER_PATTERN);
     }
 }

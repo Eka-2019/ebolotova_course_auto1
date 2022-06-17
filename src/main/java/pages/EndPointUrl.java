@@ -4,7 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum EndPointUrl {
-    DASHBOARD("/dashboard");
+    DASHBOARD("/api/v1/default_personal/dashboard"),
+    TOKEN("/uat/sso/oauth/token");
+
     String path;
 
     EndPointUrl(String path){
