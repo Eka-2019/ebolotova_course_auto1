@@ -57,6 +57,20 @@
             <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>1.8.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-engine</artifactId>
+            <version>1.8.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,15 +103,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version>
-                <configuration>
+             <!--   <configuration>
                     <properties>
                         <configurationParameters>
                             junit.jupiter.conditions.deactivate = *
                             junit.jupiter.extensions.autodetection.enabled = true
-                            <!--junit.jupiter.testinstance.lifecycle.default = per_method-->
+                            junit.jupiter.testinstance.lifecycle.default = per_method
                         </configurationParameters>
                     </properties>
-                </configuration>
+                </configuration>-->
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.jupiter</groupId>

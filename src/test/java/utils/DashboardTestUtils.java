@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 
 import io.restassured.response.ValidatableResponse;
 import models.Dashboard;
+import models.Widget;
 import org.apache.log4j.Logger;
 import java.util.List;
 
@@ -11,12 +12,22 @@ import static io.restassured.RestAssured.given;
 import static utils.GetBaseURL.BASE_URI;
 
 public class DashboardTestUtils {
-    private final Logger LOGGER = Logger.getLogger(DashboardTestUtils.class);
+    private static final Logger LOGGER = Logger.getLogger(DashboardTestUtils.class);
 
     final static String TOKEN = utils.GetToken.getToken();
     //final static String BASE_URI = "http://localhost:8080/api/v1/default_personal";
 
     public static ValidatableResponse getDashboardReguest(String path) {
+        RestAssured.baseURI = BASE_URI;
+        return given()
+                .auth()
+                .oauth2(TOKEN)
+                .when()
+                .get(path)
+                .then();
+    }
+
+    public static ValidatableResponse getWidgetReguest(String path) {
         RestAssured.baseURI = BASE_URI;
         return given()
                 .auth()
@@ -55,6 +66,30 @@ public class DashboardTestUtils {
                 .when()
                 .post(path)
                 .then();
+    }
+
+    public static ValidatableResponse postNewWidget(String path, Widget wiget) {
+        RestAssured.baseURI = BASE_URI;
+        return given()
+                .auth()
+                .oauth2(TOKEN)
+                .header("Content-type", "application/json")
+                .body(wiget)
+                .when()
+                .post(path)
+                .then();
+    }
+
+    public static String getIdFromPostNewWidget(String path, Widget widget) {
+        ValidatableResponse vr = postNewWidget(path, widget);
+        LOGGER.info(vr.extract().response().jsonPath().getString("message"));
+        return vr
+                .statusCode(201)
+                .extract()
+                .response()
+                .jsonPath()
+                .getString("widgetId");
+
     }
 
     public static ValidatableResponse postNewDashboard(String path, Dashboard dashboard) {

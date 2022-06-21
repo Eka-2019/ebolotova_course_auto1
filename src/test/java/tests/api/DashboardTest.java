@@ -3,7 +3,7 @@ package tests.api;
 import io.restassured.response.Response;
 import models.Dashboard;
 import org.apache.log4j.Logger;
-import pages.EndPointUrl;
+import config.EndPointUrl;
 import org.junit.jupiter.api.*;
 import utils.Constants;
 import utils.DashboardTestUtils;
@@ -20,7 +20,6 @@ public class DashboardTest {
         testDashboardId = DashboardTestUtils.getIdFromPostNewDashboard(EndPointUrl.DASHBOARD.getPath(), testDashboard);
         testDashboard = DashboardTestUtils.getDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId));
         LOGGER.info(Constants.LOGGER_PATTERN + "TestDashboard :" + testDashboard.toString() + " was created"+ Constants.LOGGER_PATTERN);
-        //String dashboardName = DashboardTestUtils.getDashboardNameById(EndPointUrl.DASHBOARD.addPath("/" + dashboardID));
         LOGGER.info(Constants.LOGGER_PATTERN + "TestDashboard with Id" + testDashboardId + " was created" + Constants.LOGGER_PATTERN);
     }
 

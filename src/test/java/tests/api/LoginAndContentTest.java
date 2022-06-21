@@ -4,14 +4,14 @@ import models.Dashboard;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pages.EndPointUrl;
+import config.EndPointUrl;
 import utils.Constants;
 import utils.DashboardTestUtils;
 
 import java.util.List;
 
-public class LoginAndTestContent {
-    private final Logger LOGGER = Logger.getLogger(LoginAndTestContent.class);
+public class LoginAndContentTest {
+    private final Logger LOGGER = Logger.getLogger(LoginAndContentTest.class);
 
     @Test
     public void LoginAndCheckContentTest() {

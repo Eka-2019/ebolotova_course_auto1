@@ -1,12 +1,7 @@
 package utils;
 
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import org.junit.jupiter.api.Test;
-import pages.EndPointUrl;
-
-import java.net.URL;
+import config.EndPointUrl;
 
 import static io.restassured.RestAssured.given;
 import static utils.GetBaseURL.BASE_URI;
