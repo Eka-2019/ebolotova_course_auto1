@@ -1,7 +1,7 @@
 package tests.api;
 
 import io.restassured.response.Response;
-import models.Dashboard;
+import models.dashboard.Dashboard;
 import org.apache.log4j.Logger;
 import config.EndPointUrl;
 import org.junit.jupiter.api.*;
@@ -15,7 +15,7 @@ public class DashboardTest {
     private Dashboard testDashboard = new Dashboard("Demo Dashboard API" + System.currentTimeMillis(), "Demo Dashboard API", true);
 
     @BeforeEach
-    private void init() {
+    private void createDashboardTest() {
         //create dashboard and get Id and name
         testDashboardId = DashboardTestUtils.getIdFromPostNewDashboard(EndPointUrl.DASHBOARD.getPath(), testDashboard);
         testDashboard = DashboardTestUtils.getDashboard(EndPointUrl.DASHBOARD.addPath("/" + testDashboardId));

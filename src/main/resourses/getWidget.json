@@ -1,0 +1,120 @@
+{
+  "owner": "default",
+  "share": true,
+  "id": 12,
+  "name": "LAUNCH STATISTICS AREA",
+  "widgetType": "statisticTrend",
+  "contentParameters": {
+    "contentFields": [
+      "statistics$executions$total",
+      "statistics$executions$passed",
+      "statistics$executions$failed",
+      "statistics$executions$skipped",
+      "statistics$defects$product_bug$pb001",
+      "statistics$defects$automation_bug$ab001",
+      "statistics$defects$system_issue$si001",
+      "statistics$defects$to_investigate$ti001"
+    ],
+    "itemsCount": 50,
+    "widgetOptions": {
+      "zoom": false,
+      "timeline": "launch",
+      "viewMode": "area-spline"
+    }
+  },
+  "appliedFilters": [
+    {
+      "owner": "default",
+      "share": true,
+      "id": 11,
+      "name": "DEMO_FILTER",
+      "conditions": [
+        {
+          "filteringField": "attributeValue",
+          "condition": "has",
+          "value": "demo"
+        }
+      ],
+      "orders": [
+        {
+          "sortingColumn": "startTime",
+          "isAsc": false
+        }
+      ],
+      "type": "Launch"
+    }
+  ],
+  "content": {
+    "result": [
+      {
+        "id": 5,
+        "number": 5,
+        "name": "Demo Api Tests",
+        "startTime": 1655128364409,
+        "values": {
+          "statistics$executions$passed": "30",
+          "statistics$executions$total": "30"
+        }
+      },
+      {
+        "id": 4,
+        "number": 4,
+        "name": "Demo Api Tests",
+        "startTime": 1655128353790,
+        "values": {
+          "statistics$defects$automation_bug$ab001": "1",
+          "statistics$defects$product_bug$pb001": "4",
+          "statistics$defects$to_investigate$ti001": "2",
+          "statistics$executions$failed": "5",
+          "statistics$executions$passed": "20",
+          "statistics$executions$total": "25"
+        }
+      },
+      {
+        "id": 3,
+        "number": 3,
+        "name": "Demo Api Tests",
+        "startTime": 1655128348303,
+        "values": {
+          "statistics$defects$automation_bug$ab001": "4",
+          "statistics$defects$product_bug$pb001": "4",
+          "statistics$defects$to_investigate$ti001": "10",
+          "statistics$executions$failed": "8",
+          "statistics$executions$passed": "10",
+          "statistics$executions$skipped": "2",
+          "statistics$executions$total": "20"
+        }
+      },
+      {
+        "id": 2,
+        "number": 2,
+        "name": "Demo Api Tests",
+        "startTime": 1655128341611,
+        "values": {
+          "statistics$defects$automation_bug$ab001": "5",
+          "statistics$defects$product_bug$pb001": "1",
+          "statistics$defects$system_issue$si001": "4",
+          "statistics$defects$to_investigate$ti001": "8",
+          "statistics$executions$failed": "9",
+          "statistics$executions$passed": "5",
+          "statistics$executions$skipped": "1",
+          "statistics$executions$total": "15"
+        }
+      },
+      {
+        "id": 1,
+        "number": 1,
+        "name": "Demo Api Tests",
+        "startTime": 1655128333252,
+        "values": {
+          "statistics$defects$automation_bug$ab001": "1",
+          "statistics$defects$system_issue$si001": "8",
+          "statistics$defects$to_investigate$ti001": "5",
+          "statistics$executions$failed": "9",
+          "statistics$executions$passed": "1",
+          "statistics$executions$total": "10"
+        }
+      }
+    ]
+  }
+}

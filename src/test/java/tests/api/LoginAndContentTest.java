@@ -1,6 +1,6 @@
 package tests.api;
 
-import models.Dashboard;
+import models.dashboard.Dashboard;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

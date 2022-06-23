@@ -3,8 +3,8 @@ package utils;
 import io.restassured.RestAssured;
 
 import io.restassured.response.ValidatableResponse;
-import models.Dashboard;
-import models.Widget;
+import models.dashboard.Dashboard;
+import models.widget.Widget;
 import org.apache.log4j.Logger;
 import java.util.List;
 
@@ -35,6 +35,12 @@ public class DashboardTestUtils {
                 .when()
                 .get(path)
                 .then();
+    }
+
+
+    public static Widget getWidget(String path){
+        return getWidgetReguest(path).extract()
+                .jsonPath().getObject(".", Widget.class);
     }
 
     public static Dashboard getDashboard(String path){

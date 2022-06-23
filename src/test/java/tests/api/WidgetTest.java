@@ -1,10 +1,7 @@
 package tests.api;
 
 import config.EndPointUrl;
-import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import models.Dashboard;
-import models.Widget;
+import models.widget.Widget;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import utils.Constants;
@@ -15,9 +12,8 @@ import java.util.List;
 public class WidgetTest {
 
     private final Logger LOGGER = Logger.getLogger(WidgetTest.class);
-
     private String testWidgetId;
-    private Widget testWidget = new Widget("Demo Widget API" + System.currentTimeMillis(), "Demo Widget API description", true, "oldLineChart");
+    //private Widget testWidget = new Widget("Demo Widget API" + System.currentTimeMillis(), "Demo Widget API description", true, "oldLineChart", List.of("String1"));
 
     @Test
     public void getWidgetTest(){
@@ -33,22 +29,29 @@ public class WidgetTest {
 //
 //        System.out.println(getWidgests.toString());
 
-        List<Widget> getAllWidgets = DashboardTestUtils.getWidgetReguest(EndPointUrl.WIDGET.addPath("/names/all"))
+        List<String> getAllWidgetNames = DashboardTestUtils.getWidgetReguest(EndPointUrl.WIDGET.addPath("/names/all"))
                 .extract()
                 .jsonPath()
-                .getList("content.", Widget.class);
-        System.out.println(getAllWidgets.toString());
+                .getList("content.");
+        System.out.println(getAllWidgetNames.toString());
 
     }
 
-    @Test
-    public void postWidget(){
-        testWidgetId = DashboardTestUtils.getIdFromPostNewWidget(EndPointUrl.WIDGET.getPath(), testWidget);
-        //testWidget = DashboardTestUtils.getWidgetReguest(EndPointUrl.DASHBOARD.addPath("/" + testWidgetId));
-        LOGGER.info("");
-        LOGGER.info(Constants.LOGGER_PATTERN + "TestWidget :" + testWidget.toString() + " was created"+ Constants.LOGGER_PATTERN);
-        LOGGER.info(Constants.LOGGER_PATTERN + "TestWiget with Id" + testWidgetId + " was created" + Constants.LOGGER_PATTERN);
+//    @Test
+//    public void postWidget(){
+//        testWidgetId = DashboardTestUtils.getIdFromPostNewWidget(EndPointUrl.WIDGET.getPath(), testWidget);
+//        //testWidget = DashboardTestUtils.getWidgetReguest(EndPointUrl.DASHBOARD.addPath("/" + testWidgetId));
+//        LOGGER.info("");
+//        LOGGER.info(Constants.LOGGER_PATTERN + "TestWidget :" + testWidget.toString() + " was created"+ Constants.LOGGER_PATTERN);
+//        LOGGER.info(Constants.LOGGER_PATTERN + "TestWiget with Id" + testWidgetId + " was created" + Constants.LOGGER_PATTERN);
+//
+//    }
 
+    @Test
+    public void getWidgetByID(){
+        Widget widget = DashboardTestUtils.getWidget(EndPointUrl.WIDGET.addPath("/16"));
+        //testWidget = DashboardTestUtils.getWidgetReguest(EndPointUrl.DASHBOARD.addPath("/" + testWidgetId));
+        LOGGER.info(widget.toString());
     }
 
 

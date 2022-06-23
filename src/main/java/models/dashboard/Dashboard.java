@@ -1,6 +1,5 @@
-package models;
+package models.dashboard;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,7 @@ public class Dashboard {
     String description;
     String owner;
     boolean share;
-    List<Widget> widgets;
+    List<WidgetFoDashboard> widgets;
 
 
     public Dashboard(String name, String description, boolean share) {
