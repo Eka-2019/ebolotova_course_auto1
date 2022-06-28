@@ -7,6 +7,6 @@ public class Result {
     private int id;
     private int number;
     private String name;
-    private int startTime;
+    private Long startTime;
     private Value values;
 }

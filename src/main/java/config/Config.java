@@ -7,16 +7,15 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
-
-    String env = System.getProperty("env","std");
     private final Logger LOGGER = Logger.getLogger(String.valueOf(Config.class));
+    String env = System.getProperty("env", "std");
 
-    public void initProperties(){
+    public void initProperties() {
         Properties properties = System.getProperties();
 
         try {
             InputStream propertiesFile = Config.class.getClassLoader()
-                    .getResourceAsStream( env + ".properties");
+                    .getResourceAsStream(env + ".properties");
             properties.load(propertiesFile);
 
         } catch (IOException e) {

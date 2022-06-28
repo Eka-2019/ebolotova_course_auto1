@@ -13,7 +13,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <java.version>11</java.version>
-        <jackson-databind-version>2.7.0</jackson-databind-version>
+        <jackson-databind-version>2.11.1</jackson-databind-version>
         <jaxb-impl-vesrion>2.1</jaxb-impl-vesrion>
     </properties>
 

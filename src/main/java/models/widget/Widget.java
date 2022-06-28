@@ -1,13 +1,14 @@
 package models.widget;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.swing.text.AbstractDocument;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Widget {
     private List<AppliedFilter> appliedFilters;
     private Content content;
@@ -18,4 +19,5 @@ public class Widget {
     private String owner;
     private boolean share;
     private String widgetType;
+    private List<Long> filterIds;
 }

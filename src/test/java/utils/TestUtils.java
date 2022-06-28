@@ -1,23 +1,21 @@
 package utils;
 
 import io.restassured.RestAssured;
-
 import io.restassured.response.ValidatableResponse;
 import models.dashboard.Dashboard;
 import models.widget.Widget;
 import org.apache.log4j.Logger;
+
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static utils.GetBaseURL.BASE_URI;
 
-public class DashboardTestUtils {
-    private static final Logger LOGGER = Logger.getLogger(DashboardTestUtils.class);
-
+public class TestUtils {
     final static String TOKEN = utils.GetToken.getToken();
-    //final static String BASE_URI = "http://localhost:8080/api/v1/default_personal";
+    private static final Logger LOGGER = Logger.getLogger(TestUtils.class);
 
-    public static ValidatableResponse getDashboardReguest(String path) {
+    public static ValidatableResponse getReguest(String path) {
         RestAssured.baseURI = BASE_URI;
         return given()
                 .auth()
@@ -25,32 +23,29 @@ public class DashboardTestUtils {
                 .when()
                 .get(path)
                 .then();
+    }
+
+    public static ValidatableResponse getDashboardReguest(String path) {
+        return getReguest(path);
     }
 
     public static ValidatableResponse getWidgetReguest(String path) {
-        RestAssured.baseURI = BASE_URI;
-        return given()
-                .auth()
-                .oauth2(TOKEN)
-                .when()
-                .get(path)
-                .then();
+        return getReguest(path);
     }
 
-
-    public static Widget getWidget(String path){
+    public static Widget getWidget(String path) {
         return getWidgetReguest(path).extract()
                 .jsonPath().getObject(".", Widget.class);
     }
 
-    public static Dashboard getDashboard(String path){
+    public static Dashboard getDashboard(String path) {
         return getDashboardReguest(path).extract()
                 .jsonPath().getObject(".", Dashboard.class);
     }
 
     public static List<Dashboard> getDashboards(String path) {
-           return getDashboardReguest(path).extract()
-                   .jsonPath().getList("content.", Dashboard.class);
+        return getDashboardReguest(path).extract()
+                .jsonPath().getList("content.", Dashboard.class);
     }
 
     public static String getDashboardNameById(String path) {
@@ -62,28 +57,28 @@ public class DashboardTestUtils {
                 .getString("name");
     }
 
-    public static ValidatableResponse postNewDashboard(String path, String json) {
+    public static ValidatableResponse postNewObject(String path, Object obj) {
         RestAssured.baseURI = BASE_URI;
         return given()
                 .auth()
                 .oauth2(TOKEN)
                 .header("Content-type", "application/json")
-                .body(json)
+                .body(obj)
                 .when()
                 .post(path)
                 .then();
     }
 
-    public static ValidatableResponse postNewWidget(String path, Widget wiget) {
-        RestAssured.baseURI = BASE_URI;
-        return given()
-                .auth()
-                .oauth2(TOKEN)
-                .header("Content-type", "application/json")
-                .body(wiget)
-                .when()
-                .post(path)
-                .then();
+    public static ValidatableResponse postNewDashboard(String path, Dashboard dashboard) {
+        return postNewObject(path, dashboard);
+    }
+
+    public static ValidatableResponse postNewWidget(String path, Widget widget) {
+        return postNewObject(path, widget);
+    }
+
+    public static ValidatableResponse postNewJSON(String path, String json) {
+        return postNewObject(path, json);
     }
 
     public static String getIdFromPostNewWidget(String path, Widget widget) {
@@ -94,32 +89,7 @@ public class DashboardTestUtils {
                 .extract()
                 .response()
                 .jsonPath()
-                .getString("widgetId");
-
-    }
-
-    public static ValidatableResponse postNewDashboard(String path, Dashboard dashboard) {
-        RestAssured.baseURI = BASE_URI;
-        return given()
-                .auth()
-                .oauth2(TOKEN)
-                .header("Content-type", "application/json")
-                .body(dashboard)
-                .when()
-                .post(path)
-                .then();
-    }
-
-    public static ValidatableResponse putNewDashboard(String path, Dashboard dashboard) {
-        RestAssured.baseURI = BASE_URI;
-        return given()
-                .auth()
-                .oauth2(TOKEN)
-                .header("Content-type", "application/json")
-                .body(dashboard)
-                .when()
-                .post(path)
-                .then();
+                .getString("id");
     }
 
     public static String getIdFromPostNewDashboard(String path, Dashboard dashboard) {
@@ -132,19 +102,27 @@ public class DashboardTestUtils {
                 .getString("id");
     }
 
-    public static ValidatableResponse updateDashboard(String path, Dashboard dashboard) {
+    public static ValidatableResponse updateObject(String path, Object object) {
         RestAssured.baseURI = BASE_URI;
         return given()
                 .auth()
                 .oauth2(TOKEN)
                 .header("Content-type", "application/json")
-                .body(dashboard)
+                .body(object)
                 .when()
                 .put(path)
                 .then();
     }
 
-    public static ValidatableResponse deleteDashboard(String path) {
+    public static ValidatableResponse updateDashboard(String path, Dashboard dashboard) {
+        return updateObject(path, dashboard);
+    }
+
+    public static ValidatableResponse updateWidget(String path, Widget widget) {
+        return updateObject(path, widget);
+    }
+
+    public static ValidatableResponse deleteObject(String path) {
         RestAssured.baseURI = BASE_URI;
         return given()
                 .auth()
@@ -153,4 +131,5 @@ public class DashboardTestUtils {
                 .delete(path)
                 .then();
     }
+
 }

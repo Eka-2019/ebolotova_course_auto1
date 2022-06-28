@@ -10,11 +10,11 @@ public enum EndPointUrl {
 
     String path;
 
-    EndPointUrl(String path){
+    EndPointUrl(String path) {
         this.path = path;
     }
 
-    public String addPath(String additionalPath){
-        return  path + additionalPath;
+    public String addPath(String additionalPath) {
+        return path + additionalPath;
     }
 }
