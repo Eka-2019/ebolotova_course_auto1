@@ -1,8 +1,8 @@
 package models.widget;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Condition {
     private String condition;
     private String filteringField;

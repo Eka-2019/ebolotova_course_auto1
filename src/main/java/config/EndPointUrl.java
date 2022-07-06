@@ -2,13 +2,16 @@ package config;
 
 import lombok.Getter;
 
+import static utils.Constants.PROJECT_NAME;
+
 @Getter
 public enum EndPointUrl {
-    DASHBOARD("/api/v1/default_personal/dashboard"),
-    WIDGET("/api/v1/default_personal/widget"),
+    DASHBOARD(String.format("/api/v1/%s/dashboard", PROJECT_NAME)),
+    WIDGET(String.format("/api/v1/%s/widget", PROJECT_NAME)),
     TOKEN("/uat/sso/oauth/token");
 
     String path;
+
 
     EndPointUrl(String path) {
         this.path = path;

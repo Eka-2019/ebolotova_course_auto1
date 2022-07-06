@@ -1,8 +1,8 @@
 package models.widget;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Result {
     private int id;
     private int number;

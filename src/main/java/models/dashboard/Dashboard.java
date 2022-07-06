@@ -13,7 +13,7 @@ public class Dashboard {
     String description;
     String owner;
     boolean share;
-    List<WidgetFoDashboard> widgets;
+    List<WidgetForDashboard> widgets;
 
 
     public Dashboard(String name, String description, boolean share) {

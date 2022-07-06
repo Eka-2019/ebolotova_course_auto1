@@ -2,16 +2,16 @@ package models.dashboard;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import models.WidgetPosition;
-import models.WidgetSize;
+import models.widget.Position;
+import models.widget.Size;
 
 @Data
 @NoArgsConstructor
-public class WidgetFoDashboard {
+public class WidgetForDashboard {
     String widgetName;
     int widgetId;
     String widgetType;
-    WidgetSize widgetSize;
-    WidgetPosition widgetPosition;
+    Size widgetSize;
+    Position widgetPosition;
     boolean share;
 }

@@ -1,15 +1,14 @@
 package models.widget;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class WidgetOption {
     private boolean zoom;
     private String timeline;
     private String viewMode;
-    //private boolean latest;
 }

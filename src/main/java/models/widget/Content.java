@@ -1,11 +1,10 @@
 package models.widget;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
-@Data
+@Getter
 public class Content {
     private List<Result> result;
 }

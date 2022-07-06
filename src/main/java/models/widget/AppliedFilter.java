@@ -1,10 +1,10 @@
 package models.widget;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 public class AppliedFilter {
     private List<Condition> conditions;
     private String description;

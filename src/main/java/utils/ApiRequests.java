@@ -9,11 +9,11 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static utils.GetBaseURL.BASE_URI;
+import static utils.BaseURL.BASE_URI;
 
-public class TestUtils {
-    final static String TOKEN = utils.GetToken.getToken();
-    private static final Logger LOGGER = Logger.getLogger(TestUtils.class);
+public class ApiRequests {
+    final static String TOKEN = Token.getToken();
+    private static final Logger LOGGER = Logger.getLogger(ApiRequests.class);
 
     public static ValidatableResponse getReguest(String path) {
         RestAssured.baseURI = BASE_URI;
@@ -25,31 +25,23 @@ public class TestUtils {
                 .then();
     }
 
-    public static ValidatableResponse getDashboardReguest(String path) {
-        return getReguest(path);
-    }
-
-    public static ValidatableResponse getWidgetReguest(String path) {
-        return getReguest(path);
-    }
-
     public static Widget getWidget(String path) {
-        return getWidgetReguest(path).extract()
+        return getReguest(path).extract()
                 .jsonPath().getObject(".", Widget.class);
     }
 
     public static Dashboard getDashboard(String path) {
-        return getDashboardReguest(path).extract()
+        return getReguest(path).extract()
                 .jsonPath().getObject(".", Dashboard.class);
     }
 
     public static List<Dashboard> getDashboards(String path) {
-        return getDashboardReguest(path).extract()
+        return getReguest(path).extract()
                 .jsonPath().getList("content.", Dashboard.class);
     }
 
     public static String getDashboardNameById(String path) {
-        ValidatableResponse vr = getDashboardReguest(path);
+        ValidatableResponse vr = getReguest(path);
         return vr
                 .extract()
                 .response()
@@ -131,5 +123,4 @@ public class TestUtils {
                 .delete(path)
                 .then();
     }
-
 }
